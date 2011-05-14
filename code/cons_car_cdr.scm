@@ -1,0 +1,11 @@
+(cons 0 '(1 2 3))
+(car '(1 2 3))
+(cdr '(1 2 3))
+(cons 1 2)
+(car (cons 1 2))
+(cdr (cons 1 2))
+(eq? (cons 1 2) (cons 1 '(2)))
+
+(define l (cons 1 2))
+(= (car l) 1)
+(= (cdr l) 2)
