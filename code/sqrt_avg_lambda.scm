@@ -7,7 +7,7 @@
 
 ((avg-damp square) 10)
 
-(define (fixed-point f)
+(define (fixed-point f initial-guess)
   (define tolerance 0.000001)
   (define (close-enough? u v)
     (< (abs (- u v)) tolerance))
@@ -16,14 +16,24 @@
       (if (close-enough? guess next)
           next
           (try next))))
-  (try 1.0))
+  (try initial-guess))
 
 (define (sqrt x)
-  (fixed-point (avg-damp (lambda (y) (/ x y)))))
+  (fixed-point (avg-damp (lambda (y) (/ x y))) 1.0))
 
 (sqrt 2)
 
 (define (cube-root x)
-  (fixed-point (avg-damp (lambda (y) (/ x (expt y 2))))))
+  (fixed-point (avg-damp (lambda (y) (/ x (expt y 2)))) 1.0))
 
-(cube-root 125)  
+(cube-root 125)
+
+(define (fixed-point-of-transform g transform guess)
+  (fixed-point (transform g) guess))
+
+(define (sqrt-x x)
+  (fixed-point-of-transform (lambda (y) (/ x y))
+                            avg-damp
+                            1.0))
+
+(sqrt-x 2)

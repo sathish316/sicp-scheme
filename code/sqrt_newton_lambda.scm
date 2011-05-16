@@ -48,5 +48,15 @@
 (sqrt 2)
 (sqrt 9)
 
+(define (fixed-point-of-transform g transform guess)
+  (fixed-point (transform g) guess))
+
+(define (sqrt-x x)
+  (fixed-point-of-transform (lambda (y) (- (square y) x))
+                            newtons-transform
+                            1.0))
+
+(sqrt-x 2)
+
 
   
