@@ -6,4 +6,8 @@
   (lambda (x)
     (+ 1 x)))
 
+(define square
+  (lambda (x)
+    (* x x)))
+                
 ((compose square inc) 6)
